@@ -8,20 +8,21 @@ const resetBtn = document.querySelector('.reset-btn')
 const form = document.querySelector('form')
 const customTip = document.querySelector('.custom-input')
 
-// let total = 0
-// let tip = 0
-// let bill = 0
-// let people = null
-// resetBtn.disable = true
-
-
-console.log(customInput)
 
 
 const calculateTip = (e) => {
+
+    if (billInput) {
+        resetBtn.disabled = false
+        resetBtn.classList.add('activBtn');
+    }
+
     let billValue = parseFloat(billInput.value)
+    billInput.value = billValue
     let customValue = parseFloat(customInput.value)
-    billInput.value = billValue.toFixed(2)
+
+
+
 
     btns.forEach((btn) => {
         btn.addEventListener('click', (e) => {
@@ -35,33 +36,39 @@ const calculateTip = (e) => {
             const tipDivided = document.querySelector('.tip_amount').textContent = tipPerPerson;
             const totalAmount = document.querySelector('.total_amount').textContent = totalPerPerson
 
-
-
-
-
-
-
         })
     })
+}
 
+// const customTipFun = () => {
+//     let customValue = customTip.value
+//     console.log(customValue)
+// }
+
+
+
+customTip.addEventListener("input", calculateTip);
+
+billInput.addEventListener('change', calculateTip)
+
+const clearDisplay = () => {
+    billInput.value = ''
+    countInput.value = ''
+    const tipDivided = document.querySelector('.tip_amount').textContent = "$0.00";
+    const totalAmount = document.querySelector('.total_amount').textContent = "$0.00";
+    resetBtn.disabled = true
 
 }
 
-
-billInput.addEventListener('change', calculateTip)
 resetBtn.addEventListener('click', () => {
-    billInput.value = ''
-    countInput.value = ''
-    const tipDivided = document.querySelector('.tip_amount').textContent = 0;
-    const totalAmount = document.querySelector('.total_amount').textContent = 0;
 
 
-
+    clearDisplay()
 
 
 })
 
-// countInput.addEventListener('change', calculateTip)
+
 
 
 
