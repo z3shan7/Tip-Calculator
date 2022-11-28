@@ -8,7 +8,10 @@ const resetBtn = document.querySelector('.reset-btn')
 const form = document.querySelector('form')
 const customTip = document.querySelector('.custom-input')
 
+// function customValue(){
+let customValue = Number(customInput.value)
 
+// }
 
 const calculateTip = (e) => {
 
@@ -18,17 +21,19 @@ const calculateTip = (e) => {
     }
 
     let billValue = parseFloat(billInput.value)
-    billInput.value = billValue
-    let customValue = parseFloat(customInput.value)
+    let customValue = Number(customInput.value)
+    let customVal = ((billValue * (customValue / 100).toFixed(2)))
 
-
-
+    console.log(customValue)
 
     btns.forEach((btn) => {
         btn.addEventListener('click', (e) => {
             const btnValue = e.target.value
             let totalTip = parseFloat((billValue * (btnValue / 100)).toFixed(2))
             let total = parseFloat((billValue + totalTip).toFixed(2))
+
+
+            console.log(customVal)
 
             let tipPerPerson = (totalTip / countInput.value).toFixed(2)
             let totalPerPerson = (total / countInput.value).toFixed(2)
@@ -40,14 +45,9 @@ const calculateTip = (e) => {
     })
 }
 
-// const customTipFun = () => {
-//     let customValue = customTip.value
-//     console.log(customValue)
-// }
 
 
-
-customTip.addEventListener("input", calculateTip);
+customTip.addEventListener("change", calculateTip);
 
 billInput.addEventListener('change', calculateTip)
 
